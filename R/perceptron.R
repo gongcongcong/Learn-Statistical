@@ -33,6 +33,7 @@
 #' m <- Perceptron$new()
 #' m$fit(X[idx, ], y[idx], seed = 888)
 #' pre <- m$predict(X[-idx,], y[-idx])
+#' m$model
 
 Perceptron <- R6Class(
         "Perceptron",
@@ -110,7 +111,7 @@ Perceptron <- R6Class(
                                 self$b <- self$b + private$.lr * self$y[x_f]
                                 n <- n + 1
                         }
-                        self$model <- paste(round(self$w,2), "*", paste0("w",'[',seq_along(round(self$w,2)),']')) |> paste(collapse = "+") |> paste(" + ", round(self$b, 2), " == 0")
+                        self$model <- paste(round(self$w,2), "*", paste0("x",'[',seq_along(round(self$w,2)),']')) |> paste(collapse = "+") |> paste(" + ", round(self$b, 2), " == 0")
                 },
                 #' @description plot
                 #' @param X same as the `X` of `fit`

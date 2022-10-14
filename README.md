@@ -116,3 +116,11 @@ pre <- m$predict(X[-idx,], y[-idx])
     ## pre_y        setosa versicolor virginica
     ##   setosa         25          0         0
     ##   versicolor      0         25         0
+
+``` r
+m$model
+```
+
+    ## [1] "-0.15 * w[1]+-0.67 * w[2]+2.08 * w[3]+0.17 * w[4]  +  -1.36  == 0"
+
+$- 0.15 w_{1} + - 0.67 w_{2} + 2.08 w_{3} + 0.17 w_{4} + - 1.36 = 0$

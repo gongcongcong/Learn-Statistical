@@ -4,6 +4,8 @@ author: "GongCC"
 date: "`r Sys.Date()`"
 output:
         github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ## Part One: Perceptron
@@ -81,3 +83,9 @@ m$fit(X[idx, ], y[idx], seed = 888)
 ```{r}
 pre <- m$predict(X[-idx,], y[-idx])
 ```
+
+```{r}
+m$model
+```
+
+$`r simsalapar::expr2latex(expr = quote(-0.15 * w[1] + -0.67 * w[2] + 2.08 * w[3] + 0.17 * w[4] + -1.36 == 0))`$

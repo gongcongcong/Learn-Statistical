@@ -37,6 +37,7 @@ idx <- sample(100, 50, replace = FALSE)
 m <- Perceptron$new()
 m$fit(X[idx, ], y[idx], seed = 888)
 pre <- m$predict(X[-idx,], y[-idx])
+m$model
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
