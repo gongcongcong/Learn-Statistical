@@ -7,18 +7,28 @@
 Perceptron
 }
 \examples{
-#"===============Example One===============\n")
+#===============Example One===============
 X <- iris[1:100,1:2]
 y <- iris$Species[1:100]
 m <- Perceptron$new(max_iteration = 10000)
 m$fit(X, y)
 m$plot()
-#"===============Example Two ===============\n")
+#===============Example Two ===============
 X <- matrix(c(3, 3, 4, 3, 1, 1), ncol = 2, byrow = TRUE)
 y <- c(1, 1, -1)
 fit <- Perceptron$new()
 fit$fit(X, y, w = c(0,0), b = 0)
 fit$plot()
+#===============Example Three ===============
+X <- iris[1:100,1:2]
+y <- iris$Species[1:100]
+set.seed(123)
+idx <- sample(100, 50, replace = FALSE)
+m <- Perceptron$new()
+m$fit(X[idx, ], y[idx])
+m$plot()
+m$predict(X[-idx,], y[-idx])
+m$plot(X[-idx], y[-idx])
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
@@ -47,6 +57,7 @@ fit$plot()
 \item \href{#method-Perceptron-new}{\code{Perceptron$new()}}
 \item \href{#method-Perceptron-fit}{\code{Perceptron$fit()}}
 \item \href{#method-Perceptron-plot}{\code{Perceptron$plot()}}
+\item \href{#method-Perceptron-predict}{\code{Perceptron$predict()}}
 \item \href{#method-Perceptron-clone}{\code{Perceptron$clone()}}
 }
 }
@@ -101,9 +112,36 @@ fit the data
 \subsection{Method \code{plot()}}{
 plot
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Perceptron$plot()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Perceptron$plot(X = NULL, y = NULL)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{X}}{same as the `X` of `fit`}
+
+\item{\code{y}}{same as the `y` of `fit`}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Perceptron-predict"></a>}}
+\if{latex}{\out{\hypertarget{method-Perceptron-predict}{}}}
+\subsection{Method \code{predict()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Perceptron$predict(new_X, new_y = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{new_X}}{the new data need to predict}
+
+\item{\code{new_y}}{the y value of new data}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Perceptron-clone"></a>}}
