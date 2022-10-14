@@ -1,0 +1,45 @@
+---
+title: "Learn Statistical"
+author: "GongCC"
+date: "`r Sys.Date()`"
+output:
+        github_document
+---
+
+## Part One: Perceptron
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+===============Example One===============
+
+```{r}
+library(learnML)
+X <- iris[1:100,1:2]
+y <- iris$Species[1:100]
+m <- Perceptron$new(max_iteration = 10000)
+m$fit(X, y)
+```
+
+
+```{r}
+m$plot()
+```
+
+===============Example Two ===============
+
+```{r}
+library(learnML)
+X <- matrix(c(3, 3, 4, 3, 1, 1), ncol = 2, byrow = TRUE)
+y <- c(1, 1, -1)
+fit <- Perceptron$new()
+fit$fit(X, y, w = c(0,0), b = 0)
+```
+
+
+```{r}
+fit$plot()
+```
