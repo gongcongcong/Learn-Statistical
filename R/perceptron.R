@@ -25,7 +25,7 @@
 #' m$plot()
 #' pre <- m$predict(X[-idx,], y[-idx])
 #' m$plot(X[-idx, ], y[-idx])
-#' #===============Example Fore ===============
+#' #===============Example Four ===============
 #' X <- iris[1:100,1:4]
 #' y <- iris$Species[1:100]
 #' set.seed(123)

@@ -90,3 +90,29 @@ m$plot(X[-idx, ], y[-idx])
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+
+===============Example Four ===============
+
+``` r
+X <- iris[1:100,1:4]
+y <- iris$Species[1:100]
+set.seed(123)
+idx <- sample(100, 50, replace = FALSE)
+m <- Perceptron$new()
+m$fit(X[idx, ], y[idx], seed = 888)
+```
+
+    ## Initial weights is: -1.95134334029782 , -1.54436615260889 , 0.729832697018814 , -0.277581798670677 , 
+    ## Initial intercept is: -1.65628433919183
+
+    ## epoch:  3  
+    ##  w:  -0.1513433 -0.6743662 2.079833 0.1724182    b:  -1.356284
+
+``` r
+pre <- m$predict(X[-idx,], y[-idx])
+```
+
+    ##             new_y
+    ## pre_y        setosa versicolor virginica
+    ##   setosa         25          0         0
+    ##   versicolor      0         25         0

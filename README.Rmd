@@ -66,3 +66,18 @@ pre <- m$predict(X[-idx,], y[-idx])
 ```{r}
 m$plot(X[-idx, ], y[-idx])
 ```
+
+===============Example Four ===============
+
+```{r}
+X <- iris[1:100,1:4]
+y <- iris$Species[1:100]
+set.seed(123)
+idx <- sample(100, 50, replace = FALSE)
+m <- Perceptron$new()
+m$fit(X[idx, ], y[idx], seed = 888)
+```
+
+```{r}
+pre <- m$predict(X[-idx,], y[-idx])
+```
