@@ -60,7 +60,7 @@ m$plot()
 
 ```{r}
 pre <- m$predict(X[-idx,], y[-idx])
-pre
+# pre
 ```
 
 ```{r}

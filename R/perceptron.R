@@ -23,8 +23,16 @@
 #' m <- Perceptron$new()
 #' m$fit(X[idx, ], y[idx])
 #' m$plot()
-#' m$predict(X[-idx,], y[-idx])
+#' pre <- m$predict(X[-idx,], y[-idx])
 #' m$plot(X[-idx, ], y[-idx])
+#' #===============Example Fore ===============
+#' X <- iris[1:100,1:4]
+#' y <- iris$Species[1:100]
+#' set.seed(123)
+#' idx <- sample(100, 50, replace = FALSE)
+#' m <- Perceptron$new()
+#' m$fit(X[idx, ], y[idx], seed = 888)
+#' pre <- m$predict(X[-idx,], y[-idx])
 
 Perceptron <- R6Class(
         "Perceptron",
@@ -82,7 +90,8 @@ Perceptron <- R6Class(
                         self$w <- self$w[[1]]
                         self$b <- ifelse(is.null(b),rnorm(1), b)
                         stopifnot("w or b dimention wrong!" = length(self$w) == self$f_n & length(self$b) == 1 )
-                        cat("Initial weights is: ", self$w, "\n",
+                        message("Initial weights is: ",
+                                paste(self$w, ', '), "\n",
                             "Initial intercept is: ", self$b, "\n")
                         ok <- FALSE
                         n <- 0
@@ -101,13 +110,7 @@ Perceptron <- R6Class(
                                 self$b <- self$b + private$.lr * self$y[x_f]
                                 n <- n + 1
                         }
-                        self$model <- substitute(
-                                w1 * x[1] + w2 * x[2] + b == 0,
-                                list(
-                                        w1 = round(unname(self$w[1]), 2),
-                                        w2 = round(unname(self$w[2]), 2),
-                                        b = round(self$b, 2)
-                                ))
+                        self$model <- paste(round(self$w,2), "*", paste0("w",'[',seq_along(round(self$w,2)),']')) |> paste(collapse = "+") |> paste(" + ", round(self$b, 2), " == 0")
                 },
                 #' @description plot
                 #' @param X same as the `X` of `fit`
@@ -118,7 +121,7 @@ Perceptron <- R6Class(
                                     list(y=ifelse(y == self$labels[[1]],
                                                   -1, 1)))[[1]]
                         plot(X, col = 'blue', xlab = "", ylab = "")
-                        mtext(as.expression(self$model))
+                        mtext(parse(text = self$model))
                         points(subset(X, y == 1), col = "red")
                         abline(-(self$b/self$w[2]), -(self$w[1]/self$w[2]))
                         title(
@@ -133,7 +136,7 @@ Perceptron <- R6Class(
                         if (any(pre_y != y)) {
                                 points(X[pre_y != y, ], col = 'orange', pch = 16)
                                 legend("bottomright",
-                                       legend = c(self$labels, "error predict"),
+                                       legend = c(as.character(self$labels), "error predict"),
                                        col = c("blue", "red", "orange"), pch = 1)
                         } else {
                                 legend("bottomright", legend = self$labels,

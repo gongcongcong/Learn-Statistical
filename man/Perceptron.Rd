@@ -27,8 +27,16 @@ idx <- sample(100, 50, replace = FALSE)
 m <- Perceptron$new()
 m$fit(X[idx, ], y[idx])
 m$plot()
-m$predict(X[-idx,], y[-idx])
-m$plot(X[-idx], y[-idx])
+pre <- m$predict(X[-idx,], y[-idx])
+m$plot(X[-idx, ], y[-idx])
+#===============Example Fore ===============
+X <- iris[1:100,1:4]
+y <- iris$Species[1:100]
+set.seed(123)
+idx <- sample(100, 50, replace = FALSE)
+m <- Perceptron$new()
+m$fit(X[idx, ], y[idx], seed = 888)
+pre <- m$predict(X[-idx,], y[-idx])
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
