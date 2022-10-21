@@ -9,18 +9,26 @@ kd.tree
 kd.tree
 }
 \examples{
+======================Example One====================
 x <- c(2, 5, 9, 4, 8, 7)
 y <- c(3, 4, 6, 7, 1, 2)
-tree <- kd.tree$new(matrix(c(x, y ), ncol = 2))
-tree$create()
+X <- matrix(c(x, y ), ncol = 2)
+tree <- kd.tree$new(X)
 tree
+tree$plot()
+tree$plot(T)
+======================Example Two====================
+X <- iris[1:10, 1:4]
+tree <- kd.tree$new(X)
+tree
+tree$plot()
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{df}}{contain position of each node in `kd.tree`}
+\item{\code{df}}{the raw data to constructe `kd.tree`}
 
-\item{\code{nodes}}{store the `kd.note` information}
+\item{\code{root}}{the root node}
 }
 \if{html}{\out{</div>}}
 }
@@ -28,7 +36,8 @@ tree
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-kd.tree-new}{\code{kd.tree$new()}}
-\item \href{#method-kd.tree-create}{\code{kd.tree$create()}}
+\item \href{#method-kd.tree-get_graph}{\code{kd.tree$get_graph()}}
+\item \href{#method-kd.tree-plot}{\code{kd.tree$plot()}}
 \item \href{#method-kd.tree-print}{\code{kd.tree$print()}}
 \item \href{#method-kd.tree-clone}{\code{kd.tree$clone()}}
 }
@@ -37,16 +46,7 @@ tree
 \if{html}{\out{<a id="method-kd.tree-new"></a>}}
 \if{latex}{\out{\hypertarget{method-kd.tree-new}{}}}
 \subsection{Method \code{new()}}{
-transfer numeric vector to `kd.note`
-
-
-get node type, 0 represents this node has no child nodes; 1 represents it only has left child; 2 represents it only has right child node; 3 represents has left and right children
-
-
-transfer each children nodes to `kd.note`
-
-
-get the nodes position in the tree
+create the `kd.tree`
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{kd.tree$new(X)}\if{html}{\out{</div>}}
 }
@@ -54,34 +54,43 @@ get the nodes position in the tree
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{X}}{matrix object, each row is point, each column is the dimentsion}
-
-\item{\code{axis}}{dimension to split}
-
-\item{\code{ps}}{which rows need to split in input matrix, it should be a integer vector}
-
-\item{\code{parent}}{parent node}
-
-\item{\code{node}}{get the `kd.note` location}
+\item{\code{X}}{matrix-like data to construct `kd.tree`}
 }
 \if{html}{\out{</div>}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-kd.tree-create"></a>}}
-\if{latex}{\out{\hypertarget{method-kd.tree-create}{}}}
-\subsection{Method \code{create()}}{
-create the `kd.note` to store in `nodes` and get the location of each node to store in `df`
+\if{html}{\out{<a id="method-kd.tree-get_graph"></a>}}
+\if{latex}{\out{\hypertarget{method-kd.tree-get_graph}{}}}
+\subsection{Method \code{get_graph()}}{
+return the igraph of the `kd.tree`
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{kd.tree$create()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{kd.tree$get_graph()}\if{html}{\out{</div>}}
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-kd.tree-plot"></a>}}
+\if{latex}{\out{\hypertarget{method-kd.tree-plot}{}}}
+\subsection{Method \code{plot()}}{
+plot the tree
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{kd.tree$plot(show_id = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{show_id}}{using the row number or feature content of raw data `X` as node label}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-kd.tree-print"></a>}}
 \if{latex}{\out{\hypertarget{method-kd.tree-print}{}}}
 \subsection{Method \code{print()}}{
-print the nodes location in `kd.tree`
+print the igraph
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{kd.tree$print()}\if{html}{\out{</div>}}
 }

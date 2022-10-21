@@ -9,10 +9,20 @@ kd.node
 kd.node
 }
 \examples{
-root <- kd.node$new(1, 2, 3, 4)
-note <- root$add_child(kd.node$new(2, 2, 5, 6))
-note
+root <- kd.node$new(item = c(3,4,5),
+                    axis = 2
+                    )
+left <- kd.node$new(item = c(4,2,3), axis = 3)
+left$parent
+right <- kd.node$new(item = c(1,4,5), axis = 2)
 root
+root$add_child(left)
+root$left
+root$add_child(right)
+root$right
+left$parent
+
+left$sibling()
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
@@ -26,57 +36,28 @@ root
 \item{\code{right}}{right node}
 
 \item{\code{parent}}{parent node}
-
-\item{\code{location}}{location of node in the kd tree}
 }
 \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-kd.node-node_type}{\code{kd.node$node_type()}}
-\item \href{#method-kd.node-set_location}{\code{kd.node$set_location()}}
 \item \href{#method-kd.node-new}{\code{kd.node$new()}}
+\item \href{#method-kd.node-node_type}{\code{kd.node$node_type()}}
+\item \href{#method-kd.node-print}{\code{kd.node$print()}}
+\item \href{#method-kd.node-sibling}{\code{kd.node$sibling()}}
+\item \href{#method-kd.node-add_child_auto}{\code{kd.node$add_child_auto()}}
 \item \href{#method-kd.node-add_child}{\code{kd.node$add_child()}}
 \item \href{#method-kd.node-clone}{\code{kd.node$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-kd.node-node_type"></a>}}
-\if{latex}{\out{\hypertarget{method-kd.node-node_type}{}}}
-\subsection{Method \code{node_type()}}{
-correct the location for each node
-
-
-the type of node, 0 represents root node; 1 represents left node; 2 represents right node
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{kd.node$node_type()}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{node}}{`kd.note`}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-kd.node-set_location"></a>}}
-\if{latex}{\out{\hypertarget{method-kd.node-set_location}{}}}
-\subsection{Method \code{set_location()}}{
-get and set the location of node by its item and parent's item
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{kd.node$set_location()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-kd.node-new"></a>}}
 \if{latex}{\out{\hypertarget{method-kd.node-new}{}}}
 \subsection{Method \code{new()}}{
+information of `kd.node`
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{kd.node$new(item = NULL, axis = NULL, left = NULL, right = NULL, parent = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{kd.node$new(item, axis, left = NULL, right = NULL, parent = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -91,10 +72,65 @@ get and set the location of node by its item and parent's item
 \item{\code{right}}{right node}
 
 \item{\code{parent}}{parent node}
-
-\item{\code{location}}{location of node in the kd tree}
 }
 \if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-kd.node-node_type"></a>}}
+\if{latex}{\out{\hypertarget{method-kd.node-node_type}{}}}
+\subsection{Method \code{node_type()}}{
+get the node type
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{kd.node$node_type(X)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{X}}{raw data to constructe `kd.tree`}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-kd.node-print"></a>}}
+\if{latex}{\out{\hypertarget{method-kd.node-print}{}}}
+\subsection{Method \code{print()}}{
+print `kd.node` information
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{kd.node$print()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-kd.node-sibling"></a>}}
+\if{latex}{\out{\hypertarget{method-kd.node-sibling}{}}}
+\subsection{Method \code{sibling()}}{
+get the sibling node
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{kd.node$sibling()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-kd.node-add_child_auto"></a>}}
+\if{latex}{\out{\hypertarget{method-kd.node-add_child_auto}{}}}
+\subsection{Method \code{add_child_auto()}}{
+add child node to the current node and the child node will be auto add to the left or right basing their `item`
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{kd.node$add_child_auto(child)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{child}}{child node}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+child node
 }
 }
 \if{html}{\out{<hr>}}
@@ -103,13 +139,15 @@ get and set the location of node by its item and parent's item
 \subsection{Method \code{add_child()}}{
 add child node
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{kd.node$add_child(child)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{kd.node$add_child(child, type)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{child}}{`kd.note` to add}
+\item{\code{child}}{child node}
+
+\item{\code{type}}{what type child node is, left or right?}
 }
 \if{html}{\out{</div>}}
 }

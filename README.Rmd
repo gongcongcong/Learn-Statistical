@@ -5,7 +5,7 @@ date: "`r Sys.Date()`"
 output:
         github_document
 editor_options: 
-  chunk_output_type: console
+  chunk_output_type: inline
 ---
 
 ## Part One: Perceptron
@@ -96,14 +96,55 @@ $`r simsalapar::expr2latex(expr = quote(-0.15 * x[1] + -0.67 * x[2] + 2.08 * x[3
 
 ===============Example One ===============
 ```{r}
+root <- kd.node$new(item = c(2, 4, 5), axis = 2)
+root
+```
+
+```{r}
+root$node_type()
+# 0 represents root node
+# 1 represents left node
+# 2 represents right node
+```
+
+`add_child_auto` function add child node, and it will add new child to left or right node by the child node item value.
+
+```{r}
+root$add_child_auto(child = kd.node$new(item = c(1,5,5), 
+                                        axis = 3))
+root$left
+root$right
+```
+
+```{r}
+left <- root$add_child(child = kd.node$new(item = c(3, 2, 4),
+                                           axis = 4), 
+                       type = 'left')
+root$left
+```
+
+```{r}
+left$parent
+```
+
+===============Example Two ===============
+```{r}
 x <- c(2, 5, 9, 4, 8, 7)
 y <- c(3, 4, 6, 7, 1, 2)
 tree <- kd.tree$new(matrix(c(x, y ), ncol = 2))
-tree$create()
+tree
 ```
 
 
 ```{r}
-tree
+tree$plot()
+```
+
+```{r}
+tree$plot(T)
+```
+
+```{r}
+tree$df
 ```
 

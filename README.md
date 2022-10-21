@@ -1,7 +1,7 @@
 Learn Statistical
 ================
 Gongcc
-2022-10-16
+2022-10-21
 
 ## Part One: Perceptron
 
@@ -132,18 +132,90 @@ $- 0.15 x_{1} + - 0.67 x_{2} + 2.08 x_{3} + 0.17 x_{4} + - 1.36 = 0$
 ===============Example One ===============
 
 ``` r
+root <- kd.node$new(item = c(2, 4, 5), axis = 2)
+root
+```
+
+    ## Item: (2,4,5), Split: 2
+
+``` r
+root$node_type()
+```
+
+    ## [1] 0
+
+``` r
+# 0 represents root node
+# 1 represents left node
+# 2 represents right node
+```
+
+`add_child_auto` function add child node, and it will add new child to
+left or right node by the child node item value.
+
+``` r
+root$add_child_auto(child = kd.node$new(item = c(1,5,5), 
+                                        axis = 3))
+root$left
+```
+
+    ## NULL
+
+``` r
+root$right
+```
+
+    ## Item: (1,5,5), Split: 3
+
+``` r
+left <- root$add_child(child = kd.node$new(item = c(3, 2, 4),
+                                           axis = 4), 
+                       type = 'left')
+root$left
+```
+
+    ## Item: (3,2,4), Split: 4
+
+``` r
+left$parent
+```
+
+    ## Item: (2,4,5), Split: 2
+
+===============Example Two ===============
+
+``` r
 x <- c(2, 5, 9, 4, 8, 7)
 y <- c(3, 4, 6, 7, 1, 2)
 tree <- kd.tree$new(matrix(c(x, y ), ncol = 2))
-tree$create()
-```
-
-    ## DONE !DONE   !
-
-``` r
 tree
 ```
 
-    ## (5,4) 
-    ## (2,3)(7,2) 
-    ## (NULL)(4,7)(8,1)(9,6)
+    ## IGRAPH 9616ac0 DN-- 6 5 -- 
+    ## + attr: name (v/c), label (v/c), color (v/n), label.color (v/n)
+    ## + edges from 9616ac0 (vertex names):
+    ## [1] 1->2 6->2 4->1 5->6 3->6
+
+``` r
+tree$plot()
+```
+
+![](README_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
+
+``` r
+tree$plot(T)
+```
+
+![](README_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->
+
+``` r
+tree$df
+```
+
+    ##      [,1] [,2]
+    ## [1,]    2    3
+    ## [2,]    5    4
+    ## [3,]    9    6
+    ## [4,]    4    7
+    ## [5,]    8    1
+    ## [6,]    7    2
