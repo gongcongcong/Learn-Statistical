@@ -81,14 +81,14 @@ kd.node <- R6Class(
                         self$parent <- parent
                 },
                 #' @description get the node type
-                #' @param X raw data to constructe `kd.tree`
+                #' @param X raw data to construct `kd.tree`
                 node_type = function(X) {
                         if (is.null(self$parent)) {
                                 0 # root
                         } else {
                                 a <- X[self$item, self$parent$axis]
                                 b <- X[self$parent$item, self$parent$axis]
-                                if (a < b) {
+                                if (a <= b) {
                                         1 # left
                                 } else {
                                         2 # right
@@ -158,7 +158,7 @@ kd.node <- R6Class(
 #' tree
 #' tree$plot()
 #' @importFrom R6 R6Class
-#' @importFrom igraph plot.igraph graph_from_data_frame layout.auto V V<-
+#' @importFrom igraph plot.igraph graph_from_data_frame layout.auto V V<- layout_as_tree
 kd.tree <- R6Class(
         classname = "kd.tree",
         private = list(
@@ -274,16 +274,23 @@ kd.tree <- R6Class(
                 },
                 #' @description plot the tree
                 #' @param show_id using the row number or feature content of raw data `X` as node label
-                plot = function(show_id = FALSE) {
+                #' @param layout_fun layout function
+                #' @param node_size the size of the vertex, default value is 15
+                #' @param ..., parameters pass to `plot.igraph`
+                #' @param show_label whether show node label
+                plot = function(..., show_id = FALSE, show_label = TRUE,
+                                layout_fun = layout_as_tree,
+                                node_size = 15) {
                         colors <- c("black", "orange", "darkgreen")
                         names(colors) <- 0:2 |> as.character()
                         G <- private$.df
-                        if (show_id) V(G)$label <- V(G)$name
+                        if (!show_label) V(G)$label <- NA
+                        if (show_id & show_label) V(G)$label <- V(G)$name
                         V(G)$color <- colors[as.character(V(G)$color)]
                         V(G)$label.color <- V(G)$color
-                        plot.igraph(G, layout = layout.auto(G),
-                                    vertex.label.dist = 2,
-                                    edge.arrow.size = 0.4)
+                        plot.igraph(G, layout = layout_fun(G),
+                                    vertex.size = node_size, ...
+                                    )
                        legend(1, 1.5, legend = c("root", "left", "right"),
                                col = colors, pch = 16, bty = 'n')
                 },

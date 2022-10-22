@@ -1,7 +1,7 @@
 Learn Statistical
 ================
 Gongcc
-2022-10-21
+2022-10-22
 
 ## Part One: Perceptron
 
@@ -191,19 +191,20 @@ tree <- kd.tree$new(matrix(c(x, y ), ncol = 2))
 tree
 ```
 
-    ## IGRAPH 9616ac0 DN-- 6 5 -- 
+    ## IGRAPH c67d68b DN-- 6 5 -- 
     ## + attr: name (v/c), label (v/c), color (v/n), label.color (v/n)
-    ## + edges from 9616ac0 (vertex names):
+    ## + edges from c67d68b (vertex names):
     ## [1] 1->2 6->2 4->1 5->6 3->6
 
 ``` r
-tree$plot()
+tree$plot(vertex.label.dist = -3, 
+          layout_fun = igraph::layout_as_tree)
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
 
 ``` r
-tree$plot(T)
+tree$plot(show_id = T, vertex.label.dist = -3)
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->
@@ -219,3 +220,41 @@ tree$df
     ## [4,]    4    7
     ## [5,]    8    1
     ## [6,]    7    2
+
+===============Example Three ===============
+
+``` r
+X <- iris[, 1:4]
+tree <- kd.tree$new(X)
+tree$print()
+```
+
+    ## IGRAPH c6a1133 DN-- 150 149 -- 
+    ## + attr: name (v/c), label (v/c), color (v/n), label.color (v/n)
+    ## + edges from c6a1133 (vertex names):
+    ##  [1] 49 ->98  134->98  8  ->49  65 ->49  128->134 145->134 3  ->8   20 ->8  
+    ##  [9] 19 ->65  100->65  120->128 59 ->128 129->145 126->145 39 ->3   10 ->3  
+    ## [17] 5  ->20  17 ->20  12 ->19  99 ->19  90 ->100 72 ->100 56 ->120 115->120
+    ## [25] 147->59  51 ->59  104->129 137->129 121->126 136->126 9  ->39  43 ->39 
+    ## [33] 2  ->10  36 ->10  38 ->5   1  ->5   28 ->17  34 ->17  31 ->12  44 ->12 
+    ## [41] 24 ->99  94 ->99  81 ->90  60 ->90  93 ->72  96 ->72  85 ->56  92 ->56 
+    ## [49] 122->115 139->115 69 ->147 124->147 76 ->51  111->51  150->104 117->104
+    ## [57] 146->137 105->137 140->121 109->121 108->136 110->136 42 ->9   14 ->9  
+    ## + ... omitted several edges
+
+``` r
+tree$plot(show_id = TRUE, node_size = 4, 
+          vertex.label.dist = -0.5, edge.arrow.size = .1,
+          vertex.label.size = 0.8, show_label = F)
+```
+
+![](README_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
+
+``` r
+tree$plot(show_id = TRUE, node_size = 4, 
+          vertex.label.dist = -0.5, edge.arrow.size = .1,
+          vertex.label.size = 0.8, show_label = F, 
+          layout_fun = igraph::layout.fruchterman.reingold)
+```
+
+![](README_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->

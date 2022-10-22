@@ -128,6 +128,7 @@ left$parent
 ```
 
 ===============Example Two ===============
+
 ```{r}
 x <- c(2, 5, 9, 4, 8, 7)
 y <- c(3, 4, 6, 7, 1, 2)
@@ -137,14 +138,35 @@ tree
 
 
 ```{r}
-tree$plot()
+tree$plot(vertex.label.dist = -3, 
+          layout_fun = igraph::layout_as_tree)
 ```
 
 ```{r}
-tree$plot(T)
+tree$plot(show_id = T, vertex.label.dist = -3)
 ```
 
 ```{r}
 tree$df
+```
+
+===============Example Three ===============
+```{r}
+X <- iris[, 1:4]
+tree <- kd.tree$new(X)
+tree$print()
+```
+
+```{r}
+tree$plot(show_id = TRUE, node_size = 4, 
+          vertex.label.dist = -0.5, edge.arrow.size = .1,
+          vertex.label.size = 0.8, show_label = F)
+```
+
+```{r}
+tree$plot(show_id = TRUE, node_size = 4, 
+          vertex.label.dist = -0.5, edge.arrow.size = .1,
+          vertex.label.size = 0.8, show_label = F, 
+          layout_fun = igraph::layout.fruchterman.reingold)
 ```
 

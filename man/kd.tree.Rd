@@ -75,13 +75,27 @@ return the igraph of the `kd.tree`
 \subsection{Method \code{plot()}}{
 plot the tree
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{kd.tree$plot(show_id = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{kd.tree$plot(
+  ...,
+  show_id = FALSE,
+  show_label = TRUE,
+  layout_fun = layout_as_tree,
+  node_size = 15
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
+\item{\code{..., }}{parameters pass to `plot.igraph`}
+
 \item{\code{show_id}}{using the row number or feature content of raw data `X` as node label}
+
+\item{\code{show_label}}{whether show node label}
+
+\item{\code{layout_fun}}{layout function}
+
+\item{\code{node_size}}{the size of the vertex, default value is 15}
 }
 \if{html}{\out{</div>}}
 }

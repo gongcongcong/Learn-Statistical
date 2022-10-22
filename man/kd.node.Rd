@@ -88,7 +88,7 @@ get the node type
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{X}}{raw data to constructe `kd.tree`}
+\item{\code{X}}{raw data to construct `kd.tree`}
 }
 \if{html}{\out{</div>}}
 }
