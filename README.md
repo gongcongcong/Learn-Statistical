@@ -191,9 +191,9 @@ tree <- kd.tree$new(matrix(c(x, y ), ncol = 2))
 tree
 ```
 
-    ## IGRAPH c67d68b DN-- 6 5 -- 
+    ## IGRAPH ed773aa DN-- 6 5 -- 
     ## + attr: name (v/c), label (v/c), color (v/n), label.color (v/n)
-    ## + edges from c67d68b (vertex names):
+    ## + edges from ed773aa (vertex names):
     ## [1] 1->2 6->2 4->1 5->6 3->6
 
 ``` r
@@ -229,9 +229,9 @@ tree <- kd.tree$new(X)
 tree$print()
 ```
 
-    ## IGRAPH c6a1133 DN-- 150 149 -- 
+    ## IGRAPH ef82840 DN-- 150 149 -- 
     ## + attr: name (v/c), label (v/c), color (v/n), label.color (v/n)
-    ## + edges from c6a1133 (vertex names):
+    ## + edges from ef82840 (vertex names):
     ##  [1] 49 ->98  134->98  8  ->49  65 ->49  128->134 145->134 3  ->8   20 ->8  
     ##  [9] 19 ->65  100->65  120->128 59 ->128 129->145 126->145 39 ->3   10 ->3  
     ## [17] 5  ->20  17 ->20  12 ->19  99 ->19  90 ->100 72 ->100 56 ->120 115->120
